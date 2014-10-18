@@ -15,14 +15,14 @@ ADD dokuwiki.conf /etc/nginx/sites-enabled/
 
 EXPOSE 80
 VOLUME [ \
-    "/var/www/data/pages/", \
-    "/var/www/data/meta/", \
-    "/var/www/data/media/", \
-    "/var/www/data/media_attic/", \
-    "/var/www/data/media_meta/", \
-    "/var/www/data/attic/", \
-    "/var/www/conf/", \
-    "/var/log/" \
+    "/var/www/data/pages", \
+    "/var/www/data/meta", \
+    "/var/www/data/media", \
+    "/var/www/data/media_attic", \
+    "/var/www/data/media_meta", \
+    "/var/www/data/attic", \
+    "/var/www/conf", \
+    "/var/log" \
 ]
 
 CMD /usr/sbin/php5-fpm && /usr/sbin/nginx
