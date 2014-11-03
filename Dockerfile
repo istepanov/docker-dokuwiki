@@ -1,7 +1,6 @@
-FROM ubuntu:latest
+FROM istepanov/base:latest
+MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
 
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
 RUN apt-get install -y nginx php5-fpm php5-gd curl
 
 RUN mkdir -p /var/www
