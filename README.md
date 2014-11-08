@@ -5,9 +5,13 @@ Docker container image with [DokuWiki](https://www.dokuwiki.org/dokuwiki) and ng
 
 ###How to run
 
+Assume your docker host is localhost and HTTP public port is 8000 (change these values if you need).
+
+First, run new dokuwiki container:
+
     docker run -d -p 8000:80 --name dokuwiki istepanov/dokuwiki
 
-then access DokuWiki at URL `http://HOST:8000/`, where `HOST` is your host's IP address or domain name (e.g. `http://example.com:8000/`). You can replace 8000 with any available TCP port you want.
+Then setup dokuwiki using installer at URL `http://localhost:8000/install.php`
 
 ###How to make data persistent
 
@@ -24,8 +28,8 @@ To make sure data won't be deleted if container is removed, create an empty cont
 
 ###How to backup data
 
-	# create dokuwiki-backup.tar.gz archive in current directory using temporaty container
-    docker run -ti --rm --volumes-from dokuwiki -v $(pwd):/backup ubuntu tar zcvf /backup/dokuwiki-backup.tar.gz /var/www
+    # create dokuwiki-backup.tar.gz archive in current directory using temporaty container
+    docker run --rm --volumes-from dokuwiki -v $(pwd):/backup ubuntu tar zcvf /backup/dokuwiki-backup.tar.gz /var/www
 
 ###How to restore from backup
 
@@ -36,7 +40,7 @@ To make sure data won't be deleted if container is removed, create an empty cont
     docker run --volumes-from dokuwiki --name dokuwiki-data busybox
     
     # restore from backup using temporary container
-    docker run -ti --rm --volumes-from dokuwiki -w / -v $(pwd):/backup ubuntu tar xzvf /backup/dokuwiki-backup.tar.gz
+    docker run --rm --volumes-from dokuwiki -w / -v $(pwd):/backup ubuntu tar xzvf /backup/dokuwiki-backup.tar.gz
     
     # start dokuwiki
     docker start dokuwiki
