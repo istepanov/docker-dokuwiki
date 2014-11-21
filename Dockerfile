@@ -1,7 +1,9 @@
 FROM istepanov/base:latest
 MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
 
-RUN apt-get install -y nginx php5-fpm php5-gd curl
+RUN apt-get update && \
+    apt-get install -y nginx php5-fpm php5-gd curl && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/www
 RUN cd /var/www && curl http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz | tar xz --strip 1
