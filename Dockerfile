@@ -1,4 +1,4 @@
-FROM istepanov/base:latest
+FROM ubuntu:14.04
 MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
 
 RUN apt-get update && \
