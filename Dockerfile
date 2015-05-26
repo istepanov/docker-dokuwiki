@@ -6,12 +6,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ENV DOKUWIKI_VERSION 2014-09-29d
-ENV SHA1_CHECKSUM 2bf2d6c242c00e9c97f0647e71583375
+ENV MD5_CHECKSUM 2bf2d6c242c00e9c97f0647e71583375
 
 RUN mkdir -p /var/www \
     && cd /var/www \
     && curl -O "http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" \
-    && echo "$SHA1_CHECKSUM  dokuwiki-$DOKUWIKI_VERSION.tgz" | md5sum -c - \
+    && echo "$MD5_CHECKSUM  dokuwiki-$DOKUWIKI_VERSION.tgz" | md5sum -c - \
     && tar xzf "dokuwiki-$DOKUWIKI_VERSION.tgz" --strip 1 \
     && rm "dokuwiki-$DOKUWIKI_VERSION.tgz"
 
