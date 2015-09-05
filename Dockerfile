@@ -31,8 +31,6 @@ RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     mv /var/www/conf /var/dokuwiki-storage/conf && \
     ln -s /var/dokuwiki-storage/conf /var/www/conf
 
-RUN chown -R www-data:www-data /var/www && chown -R www-data:www-data /var/dokuwiki-storage
-
 RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php5/fpm/php.ini
 RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
@@ -40,6 +38,8 @@ RUN rm /etc/nginx/sites-enabled/*
 ADD dokuwiki.conf /etc/nginx/sites-enabled/
 
 ADD supervisord.conf /etc/supervisord.conf
+ADD start.sh /start.sh
+RUN chmod +x /start.sh
 
 EXPOSE 80
 VOLUME [ \
@@ -47,4 +47,4 @@ VOLUME [ \
     "/var/log" \
 ]
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD /start.sh
