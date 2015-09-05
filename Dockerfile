@@ -4,7 +4,7 @@ MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
     echo 'deb http://ppa.launchpad.net/ondrej/php5/ubuntu trusty main' > /etc/apt/sources.list.d/ondrej-php5-trusty.list && \
     apt-get update && \
-    apt-get install -y nginx php5-fpm php5-gd curl && \
+    apt-get install -y supervisor nginx php5-fpm php5-gd curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV DOKUWIKI_VERSION 2015-08-10a
@@ -20,9 +20,12 @@ RUN mkdir -p /var/www \
 RUN chown -R www-data:www-data /var/www
 
 RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php5/fpm/php.ini
+RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/*
 ADD dokuwiki.conf /etc/nginx/sites-enabled/
+
+ADD supervisord.conf /etc/supervisord.conf
 
 EXPOSE 80
 VOLUME [ \
@@ -36,4 +39,4 @@ VOLUME [ \
     "/var/log" \
 ]
 
-CMD /usr/sbin/php5-fpm && /usr/sbin/nginx
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
