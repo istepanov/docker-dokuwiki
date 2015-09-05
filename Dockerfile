@@ -7,8 +7,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
     apt-get install -y nginx php5-fpm php5-gd curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV DOKUWIKI_VERSION 2014-09-29d
-ENV MD5_CHECKSUM 2bf2d6c242c00e9c97f0647e71583375
+ENV DOKUWIKI_VERSION 2015-08-10a
+ENV MD5_CHECKSUM a4b8ae00ce94e42d4ef52dd8f4ad30fe
 
 RUN mkdir -p /var/www \
     && cd /var/www \
