@@ -42,9 +42,6 @@ ADD start.sh /start.sh
 RUN chmod +x /start.sh
 
 EXPOSE 80
-VOLUME [ \
-    "/var/dokuwiki-storage", \
-    "/var/log" \
-]
+VOLUME ["/var/dokuwiki-storage"]
 
 CMD /start.sh
