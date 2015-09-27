@@ -26,6 +26,27 @@ To make sure data won't be deleted if container is removed, create an empty cont
     # to restore dokuwiki, create new dokuwiki container and attach dokuwiki-data volume to it
     docker run -d -p 8000:80 --volumes-from dokuwiki-data --name dokuwiki istepanov/dokuwiki:2.0
 
+### Persistent plugins
+
+Dokuwiki installs plugins to `lib/plugins/`, but this folder isn't inside persistent volume storage by default, so all plugins will be erased when container is re-created.  The recommended way to make plugins persistent is to create your own Docker image with `istepanov/dokuwiki` as a base image and use shell commands inside the Dockerfile to install needed plugins.
+
+Example (install [Dokuwiki ToDo](https://www.dokuwiki.org/plugin:todo) plugin):
+
+    FROM istepanov/dokuwiki
+    MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
+
+    # this is an example Dockerfile that demonstrates how to add Dokuwiki plugins to istepanov/dokuwiki image
+
+    RUN apt-get update && \
+        apt-get install -y unzip && \
+        apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+    # add todo plugin
+    RUN curl -O -L "https://github.com/leibler/dokuwiki-plugin-todo/archive/stable.zip" && \
+        unzip stable.zip -d /var/www/lib/plugins/ && \
+        mv /var/www/lib/plugins/dokuwiki-plugin-todo-stable /var/www/lib/plugins/todo && \
+        rm -rf stable.zip
+
 ### How to backup data
 
     # create dokuwiki-backup.tar.gz archive in current directory using temporaty container
