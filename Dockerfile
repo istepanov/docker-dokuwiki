@@ -8,7 +8,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV DOKUWIKI_VERSION 2016-06-26a
-ENV MD5_CHECKSUM bd8bdd986f02228a3dd5b53b3ca0cd5c
+ENV MD5_CHECKSUM 9b9ad79421a1bdad9c133e859140f3f2
 
 RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     cd /var/www && \
