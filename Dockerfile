@@ -7,8 +7,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
     apt-get install -y supervisor nginx php5-fpm php5-gd curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV DOKUWIKI_VERSION 2015-08-10a
-ENV MD5_CHECKSUM a4b8ae00ce94e42d4ef52dd8f4ad30fe
+ENV DOKUWIKI_VERSION 2016-06-26a
+ENV MD5_CHECKSUM 9b9ad79421a1bdad9c133e859140f3f2
 
 RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     cd /var/www && \
