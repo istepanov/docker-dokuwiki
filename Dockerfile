@@ -12,8 +12,8 @@ ENV MD5_CHECKSUM 9b9ad79421a1bdad9c133e859140f3f2
 
 RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     cd /var/www && \
-    curl -O "http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
-    echo "$MD5_CHECKSUM  dokuwiki-$DOKUWIKI_VERSION.tgz" | md5sum -c - && \
+    curl -O "https://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
+    echo "$MD5_CHECKSUM dokuwiki-$DOKUWIKI_VERSION.tgz" | md5sum -c - && \
     tar xzf "dokuwiki-$DOKUWIKI_VERSION.tgz" --strip 1 && \
     rm "dokuwiki-$DOKUWIKI_VERSION.tgz" && \
     mv /var/www/data/pages /var/dokuwiki-storage/data/pages && \
