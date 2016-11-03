@@ -1,6 +1,13 @@
 istepanov/dokuwiki
 ==================
 
+[![Docker Stars](https://img.shields.io/docker/stars/istepanov/dokuwiki.svg)](https://hub.docker.com/r/istepanov/dokuwiki/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/istepanov/dokuwiki.svg)](https://hub.docker.com/r/istepanov/dokuwiki/)
+[![Docker Build](https://img.shields.io/docker/automated/istepanov/dokuwiki.svg)](https://hub.docker.com/r/istepanov/dokuwiki/)
+[![Layers](https://images.microbadger.com/badges/image/istepanov/dokuwiki.svg)](https://microbadger.com/images/istepanov/dokuwiki)
+[![Version](https://images.microbadger.com/badges/version/istepanov/dokuwiki.svg)](https://microbadger.com/images/istepanov/dokuwiki)
+[![Join the chat at https://gitter.im/istepanov/docker-dokuwiki](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/istepanov/docker-dokuwiki?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Docker container image with [DokuWiki](https://www.dokuwiki.org/dokuwiki) and nginx
 
 ### How to run
