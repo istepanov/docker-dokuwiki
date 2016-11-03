@@ -1,20 +1,17 @@
-FROM ubuntu:14.04
+FROM alpine:3.4
 MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
-
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
-    echo 'deb http://ppa.launchpad.net/ondrej/php5/ubuntu trusty main' > /etc/apt/sources.list.d/ondrej-php5-trusty.list && \
-    apt-get update && \
-    apt-get install -y supervisor nginx php5-fpm php5-gd curl && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV DOKUWIKI_VERSION 2016-06-26a
 ENV MD5_CHECKSUM 9b9ad79421a1bdad9c133e859140f3f2
 
-RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
+RUN apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ add \
+    php7 php7-fpm php7-gd php7-session nginx supervisor curl tar
+
+RUN mkdir -p /run/nginx && \
+    mkdir -p /var/www /var/dokuwiki-storage/data && \
     cd /var/www && \
-    curl -O "https://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
-    echo "$MD5_CHECKSUM dokuwiki-$DOKUWIKI_VERSION.tgz" | md5sum -c - && \
-    tar xzf "dokuwiki-$DOKUWIKI_VERSION.tgz" --strip 1 && \
+    curl -O -L "https://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
+    tar -xzf "dokuwiki-$DOKUWIKI_VERSION.tgz" --strip 1 && \
     rm "dokuwiki-$DOKUWIKI_VERSION.tgz" && \
     mv /var/www/data/pages /var/dokuwiki-storage/data/pages && \
     ln -s /var/dokuwiki-storage/data/pages /var/www/data/pages && \
@@ -31,15 +28,17 @@ RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     mv /var/www/conf /var/dokuwiki-storage/conf && \
     ln -s /var/dokuwiki-storage/conf /var/www/conf
 
-RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php5/fpm/php.ini
-RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-RUN rm /etc/nginx/sites-enabled/*
-ADD dokuwiki.conf /etc/nginx/sites-enabled/
-
+ADD nginx.conf /etc/nginx/nginx.conf
 ADD supervisord.conf /etc/supervisord.conf
 ADD start.sh /start.sh
-RUN chmod +x /start.sh
+
+RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php7/php-fpm.ini && \
+    sed -i -e "s|;daemonize\s*=\s*yes|daemonize = no|g" /etc/php7/php-fpm.conf && \
+    sed -i -e "s|listen\s*=\s*127\.0\.0\.1:9000|listen = /var/run/php-fpm7.sock|g" /etc/php7/php-fpm.d/www.conf && \
+    sed -i -e "s|;listen\.owner\s*=\s*|listen.owner = |g" /etc/php7/php-fpm.d/www.conf && \
+    sed -i -e "s|;listen\.group\s*=\s*|listen.group = |g" /etc/php7/php-fpm.d/www.conf && \
+    sed -i -e "s|;listen\.mode\s*=\s*|listen.mode = |g" /etc/php7/php-fpm.d/www.conf && \
+    chmod +x /start.sh
 
 EXPOSE 80
 VOLUME ["/var/dokuwiki-storage"]
