@@ -2,6 +2,8 @@
 
 set -e
 
+chown -R nobody /var/lib/nginx
+
 chown -R nobody /var/www
 chown -R nobody /var/dokuwiki-storage
 
