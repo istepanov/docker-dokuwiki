@@ -1,8 +1,8 @@
 FROM alpine:3.4
 MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
 
-ENV DOKUWIKI_VERSION 2017-02-19a
-ENV MD5_CHECKSUM 78e8c27291fbc3de04c7f107c3f7725a
+ENV DOKUWIKI_VERSION 2017-02-19b
+ENV MD5_CHECKSUM ea11e4046319710a2bc6fdf58b5cda86
 
 RUN apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ add \
     php7 php7-fpm php7-gd php7-session php7-xml nginx supervisor curl tar
