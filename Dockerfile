@@ -38,7 +38,7 @@ RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php7/php-fpm.ini && \
     sed -i -e "s|listen\s*=\s*127\.0\.0\.1:9000|listen = /var/run/php-fpm7.sock|g" /etc/php7/php-fpm.d/www.conf && \
     sed -i -e "s|;listen\.owner\s*=\s*\w*|listen.owner = nginx|g" /etc/php7/php-fpm.d/www.conf && \
     sed -i -e "s|;listen\.group\s*=\s*\w*|listen.group = nginx|g" /etc/php7/php-fpm.d/www.conf && \
-    sed -i -e "s|;user\s*=\s*\w*|user = nginx|g" /etc/php7/php-fpm.d/www.conf && \
+    sed -i -e "s|user\s*=\s*\w*|user = nginx|g" /etc/php7/php-fpm.d/www.conf && \
     sed -i -e "s|;listen\.mode\s*=\s*|listen.mode = |g" /etc/php7/php-fpm.d/www.conf && \
     chmod +x /start.sh
 
