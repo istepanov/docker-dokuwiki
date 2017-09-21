@@ -1,8 +1,8 @@
 FROM alpine:3.6
 MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
 
-ENV DOKUWIKI_VERSION 2017-02-19b
-ENV MD5_CHECKSUM ea11e4046319710a2bc6fdf58b5cda86
+ENV DOKUWIKI_VERSION 2017-02-19e
+ENV MD5_CHECKSUM 09bf175f28d6e7ff2c2e3be60be8c65f
 
 RUN apk --no-cache add \
     php7 php7-openssl php7-zlib php7-mbstring php7-fpm php7-gd php7-session php7-xml nginx \
