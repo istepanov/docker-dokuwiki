@@ -1,6 +1,8 @@
 istepanov/dokuwiki
 ==================
 
+## THIS PROJECT IS NO LONGER MAINTAINED
+
 [![Docker Stars](https://img.shields.io/docker/stars/istepanov/dokuwiki.svg)](https://hub.docker.com/r/istepanov/dokuwiki/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/istepanov/dokuwiki.svg)](https://hub.docker.com/r/istepanov/dokuwiki/)
 [![Docker Build](https://img.shields.io/docker/automated/istepanov/dokuwiki.svg)](https://hub.docker.com/r/istepanov/dokuwiki/)
